@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${paciente != null ? 'Editar paciente' : 'Crear paciente'}"></title>
+</head>
+<body>
+<form th:action="@{/pacientes}" th:method="${paciente != null ? 'put' : 'post'}" th:object="${paciente}">
+    <h2 th:text="${paciente != null ? 'Editar paciente' : 'Crear nuevo paciente'}"></h2>
+    <input type="hidden" name="id" th:if="${paciente != null}" th:value="${paciente.id}">
+    <label>Nombre paciente</label>
+    <input th:value="${paciente != null  ? paciente.name : ''}" name="name">
+    <label>Apellido paciente</label>
+    <input th:value="${paciente !=null  ? paciente.surname : ''}" name="surname">
+    <label>RUN paciente</label>
+    <input th:value="${paciente != null  ? paciente.run : ''}" name="run">
+    <label>Email paciente</label>
+    <input th:value="${paciente != null  ? paciente.email : ''}" name="email">
+    <input th:type="submit" th:value="${paciente != null  ? 'Editar' : 'Crear'}">
+</form>
+</body>
+</html>
