@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Pacientes</title>
+    <th:block th:insert="components/bootstrap :: head"></th:block>
 </head>
 <body>
-<h1>Lista de Pacientes</h1>
-<table>
+<header>
+    <th:block th:insert="components/nav :: nav"></th:block>
+</header>
+<h1 class="mt-5 mb-5 text-center">Lista de Pacientes</h1>
+<table class="table">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>run</th>
-            <th>email</th>
-            <th>Acciones</th>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">run</th>
+            <th scope="col">email</th>
+            <th scope="col">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -24,19 +28,31 @@
             <td th:text="${paciente.surname}"></td>
             <td th:text="${paciente.run}"></td>
             <td th:text="${paciente.email}"></td>
-            <td>
+            <td class="d-flex gap-2">
                 <form th:action="@{/pacientes/editar}" th:method="get" th:object="${paciente}">
                     <input type="hidden" name="id" th:value="${paciente.id}">
-                    <input type="submit" value="Editar">
+                    <input type="submit" value="Editar" class="btn btn-warning">
                 </form>
                 <form th:action="@{/pacientes/eliminar}" th:method="delete" th:object="${paciente}">
                     <input type="hidden" name="id" th:value="${paciente.id}">
-                    <input type="submit" value="Eliminar">
+                    <input type="submit" value="Eliminar" class="btn btn-danger" onclick="return confirmDelete()">
                 </form>
             </td>
         </tr>
     </tbody>
 </table>
-<a th:href="@{/pacientes/nuevo}" type="submit">Nuevo paciente</a>
+
+<div class="d-flex justify-content-center mt-5">
+    <a th:href="@{/pacientes/nuevo}" type="submit" class="btn btn-primary  ">Nuevo paciente</a>
+</div>
+<script>
+    function confirmDelete(){
+        if(confirm("Está seguro que desea eliminar al paciente ")) {
+            return true;
+        } else {
+            event.preventDefault();
+            return false;
+        }   }
+</script>
 </body>
 </html>

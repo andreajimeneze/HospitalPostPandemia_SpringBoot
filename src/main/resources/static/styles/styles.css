@@ -1,0 +1,25 @@
+:root {
+    font-size: 14px;
+}
+
+label.form-label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+form.form {
+    width: 600px;
+}
+
+a.nav-link {
+    margin-right: 50px;
+}
+
+div#navbarNavDropdown.collapse.navbar-collapse {
+    justify-content: space-evenly;
+    margin-left: 350px;
+}
+
+h2 {
+    font-size: 1.5rem;
+}

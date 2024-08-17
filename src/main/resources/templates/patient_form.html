@@ -3,20 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${paciente != null ? 'Editar paciente' : 'Crear paciente'}"></title>
+    <th:block th:insert="components/bootstrap :: head"></th:block>
+
 </head>
+<div th:insert="components/nav :: nav"></div>
 <body>
-<form th:action="@{/pacientes}" th:method="${paciente != null ? 'put' : 'post'}" th:object="${paciente}">
-    <h2 th:text="${paciente != null ? 'Editar paciente' : 'Crear nuevo paciente'}"></h2>
+<div class="d-flex justify-content-center align-items-center">
+    <form class="form justify-center mx-5 px-5" th:action="@{/pacientes}" th:method="${paciente != null ? 'put' : 'post'}" th:object="${paciente}">
+    <h2 class="text-center my-5" th:text="${paciente != null ? 'Editar paciente' : 'Crear nuevo paciente'}"></h2>
     <input type="hidden" name="id" th:if="${paciente != null}" th:value="${paciente.id}">
-    <label>Nombre paciente</label>
-    <input th:value="${paciente != null  ? paciente.name : ''}" name="name">
-    <label>Apellido paciente</label>
-    <input th:value="${paciente !=null  ? paciente.surname : ''}" name="surname">
-    <label>RUN paciente</label>
-    <input th:value="${paciente != null  ? paciente.run : ''}" name="run">
-    <label>Email paciente</label>
-    <input th:value="${paciente != null  ? paciente.email : ''}" name="email">
-    <input th:type="submit" th:value="${paciente != null  ? 'Editar' : 'Crear'}">
+
+    <div class="mb-4">
+        <label for="name" class="form-label">Nombre paciente</label>
+        <input id="name" class="form-control" th:value="${paciente != null  ? paciente.name : ''}" name="name">
+    </div>
+    <div class="mb-4">
+        <label for="surname" class="form-label">Apellido paciente</label>
+        <input id="surname" class="form-control" th:value="${paciente !=null  ? paciente.surname : ''}" name="surname">
+    </div>
+    <div class="mb-4">
+        <label class="form-label">RUN paciente</label>
+        <input class="form-control" th:value="${paciente != null  ? paciente.run : ''}" name="run">
+    </div>
+    <div class="mb-4">
+        <label class="form-label">Email paciente</label>
+        <input class="form-control" th:value="${paciente != null  ? paciente.email : ''}" name="email">
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        <input th:type="submit" th:value="${paciente != null  ? 'Editar Paciente' : 'Crear Paciente'}" th:class="${paciente != null  ? 'btn btn-secondary' : 'btn btn-primary'}">
+    </div>
 </form>
+</div>
 </body>
 </html>
