@@ -9,39 +9,46 @@
 <header>
     <th:block th:insert="components/nav :: nav"></th:block>
 </header>
-<h1 class="mt-5 mb-5 text-center">Lista de Pacientes</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">run</th>
-            <th scope="col">email</th>
-            <th scope="col">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="paciente : ${pacientes}">
-            <td th:text="${paciente.id}"></td>
-            <td th:text="${paciente.name}"></td>
-            <td th:text="${paciente.surname}"></td>
-            <td th:text="${paciente.run}"></td>
-            <td th:text="${paciente.email}"></td>
-            <td class="d-flex gap-2">
-                <form th:action="@{/pacientes/editar}" th:method="get" th:object="${paciente}">
-                    <input type="hidden" name="id" th:value="${paciente.id}">
-                    <input type="submit" value="Editar" class="btn btn-warning">
-                </form>
-                <form th:action="@{/pacientes/eliminar}" th:method="delete" th:object="${paciente}">
-                    <input type="hidden" name="id" th:value="${paciente.id}">
-                    <input type="submit" value="Eliminar" class="btn btn-danger" onclick="return confirmDelete()">
-                </form>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
+<h1 class="mt-5 mb-5 text-center">Listado de Pacientes</h1>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">run</th>
+                <th scope="col">email</th>
+                <th scope="col">Acciones Paciente</th>
+                <th scope="col">Acciones Diagnóstico</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="paciente : ${pacientes}">
+                <td th:text="${paciente.id}"></td>
+                <td th:text="${paciente.name}"></td>
+                <td th:text="${paciente.surname}"></td>
+                <td th:text="${paciente.run}"></td>
+                <td th:text="${paciente.email}"></td>
+                <td class="d-flex gap-2">
+                    <form th:action="@{/pacientes/editar}" th:method="get" th:object="${paciente}">
+                        <input type="hidden" name="id" th:value="${paciente.id}">
+                        <input type="submit" value="Editar" class="btn btn-warning">
+                    </form>
+                    <form th:action="@{/pacientes/eliminar}" th:method="delete" th:object="${paciente}">
+                        <input type="hidden" name="id" th:value="${paciente.id}">
+                        <input type="submit" value="Eliminar" class="btn btn-danger" onclick="return confirmDelete()">
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/diagnosticos/{id}(id=${paciente.id})}" th:method="get">
+                        <input type="submit" class="btn btn-success" value="Ver Diagnósticos">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <div class="d-flex justify-content-center mt-5">
     <a th:href="@{/pacientes/nuevo}" type="submit" class="btn btn-primary  ">Nuevo paciente</a>
 </div>

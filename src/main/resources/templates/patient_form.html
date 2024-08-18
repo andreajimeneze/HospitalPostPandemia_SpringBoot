@@ -27,8 +27,10 @@
     </div>
     <div class="mb-4">
         <label class="form-label">Email paciente</label>
-        <input class="form-control" th:value="${paciente != null  ? paciente.email : ''}" name="email">
+        <input type="email" class="form-control" th:value="${paciente != null  ? paciente.email : ''}" name="email">
     </div>
+
+
     <div class="d-flex justify-content-center mt-5">
         <input th:type="submit" th:value="${paciente != null  ? 'Editar Paciente' : 'Crear Paciente'}" th:class="${paciente != null  ? 'btn btn-secondary' : 'btn btn-primary'}">
     </div>

@@ -3,7 +3,11 @@ package cl.praxis.proyectohospitalpostpandemia.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -19,4 +23,7 @@ public class Patient {
     @Column(nullable = false, length = 15)
     private String run;
     private String email;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Diagnoses> diagnoses = new ArrayList<>();
 }

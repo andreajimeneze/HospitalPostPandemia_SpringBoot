@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnósticos</title>
+    <th:block th:insert="components/bootstrap :: head"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:insert="components/nav :: nav"></th:block>
+</header>
+<div class="mx-5">
+    <h2 class="mt-5 mb-5 text-center">Historial Diagnósticos Paciente</h2>
+    <div class="mb-5">
+        <p th:text="'Nombre Paciente: ' + ${paciente.name} + ' ' + ${paciente.surname}"></p>
+        <p th:text="'RUN Paciente: ' + ${paciente.run}"></p>
+    </div>
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Fecha Atención</th>
+                <th scope="col">Diagnóstico</th>
+                <th scope="col">Estado Paciente</th>
+                <th scope="col">Fecha Alta</th>
+                <!--<th scope="col">Acciones</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="diagnostico : ${diagnosticos}">
+                <td th:text="${diagnostico.id}"></td>
+                <td th:text="${diagnostico.dateDiagnoses}"></td>
+                <td th:text="${diagnostico.nameDiagnoses}"></td>
+                <td th:text="${diagnostico.status}"></td>
+                <td th:text="${diagnostico.discharcheDate}"></td>
+                <!--
+                <td class="d-flex gap-2">
+                    <form th:action="@{/pacientes/diagnostico/editar}" th:method="get" th:object="${paciente}">
+                        <input type="hidden" name="id" th:value="${paciente.id}">
+                        <input type="submit" value="Editar" class="btn btn-warning">
+                    </form>
+                    <form th:action="@{/pacientes/diagnostico/eliminar}" th:method="delete" th:object="${paciente}">
+                        <input type="hidden" name="id" th:value="${paciente.id}">
+                        <input type="submit" value="Eliminar" class="btn btn-danger" onclick="return confirmDelete()">
+                    </form>
+                </td>
+                -->
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        <a th:href="@{/pacientes/diagnostico/nuevo}" type="submit" class="btn btn-primary  ">Agregar Diagnóstico</a>
+    </div>
+</div>
+<script>
+    function confirmDelete(){
+        if(confirm("Está seguro que desea eliminar al paciente ")) {
+            return true;
+        } else {
+            event.preventDefault();
+            return false;
+        }   }
+</script>
+</body>
+</html>

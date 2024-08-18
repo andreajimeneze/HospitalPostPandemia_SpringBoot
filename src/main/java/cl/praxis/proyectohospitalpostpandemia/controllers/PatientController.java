@@ -1,6 +1,7 @@
 package cl.praxis.proyectohospitalpostpandemia.controllers;
 
 import cl.praxis.proyectohospitalpostpandemia.App;
+import cl.praxis.proyectohospitalpostpandemia.entities.Diagnoses;
 import cl.praxis.proyectohospitalpostpandemia.entities.Patient;
 import cl.praxis.proyectohospitalpostpandemia.services.IBaseCrudService;
 import org.slf4j.Logger;
@@ -10,11 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/pacientes")
 public class PatientController {
     @Autowired
     private IBaseCrudService<Patient> patientService;
+
+    @Autowired
+    private IBaseCrudService<Diagnoses> diagnosesService;
 
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
